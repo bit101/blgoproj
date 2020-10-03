@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+  echo "usage:"
+  echo "./new_project <path>"
+  exit 1
+fi
+
+if [ -d "$1" ]
+then
+  echo "A directory exists at $1"
+  exit 1
+fi
+
+if [ -f "$1" ]
+then
+  echo "A file exists at $1"
+  exit 1
+fi
+
+echo "Making project at $1"
+mkdir -p $1/base
+cp -r base $1
+cp go.mod $1
+cp main.go $1
+cp Makefile $1
+
+echo "Done!"
+echo "Next steps:"
+echo "  cd $1"
+echo "  make"
