@@ -6,7 +6,7 @@ import (
 	"github.com/bit101/blgo/util"
 )
 
-type RenderFunc func(surface *blgo.Surface, percent float64)
+type RenderFunc func(surface *blgo.Surface, width, height, percent float64)
 
 var (
 	surface    *blgo.Surface
@@ -18,7 +18,7 @@ const framesDir = "frames" // Must Exist!!!
 func RenderImage(width, height float64, render RenderFunc) {
 	outFileName := "out.png"
 	surface = blgo.NewSurface(width, height)
-	render(surface, 0)
+	render(surface, width, height, 0)
 	surface.WriteToPNG(outFileName)
 	util.ViewImage(outFileName)
 }
@@ -46,5 +46,5 @@ func renderAnim(width, height float64, seconds, fps int, render RenderFunc) {
 }
 
 func internalRender(percent float64) {
-	renderFunc(surface, percent)
+	renderFunc(surface, surface.Width, surface.Height, percent)
 }
