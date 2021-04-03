@@ -9,9 +9,7 @@ import (
 const mode = "image"
 
 func main() {
-	// w, h, percent
 	base.RenderImage(800, 800, 1, setup, render)
-	// w, h, time, fps
 	// base.RenderGif(400, 400, 30, 30, setup, render)
 	// base.RenderVideo(1280, 720, 10, 30, setup, render)
 }
