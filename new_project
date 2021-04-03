@@ -23,6 +23,7 @@ echo "Making project at $1"
 mkdir -p $1/base
 cp -r base $1
 cp go.mod $1
+cp go.sum $1
 cp main.go $1
 cp Makefile $1
 
