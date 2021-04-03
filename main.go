@@ -9,26 +9,11 @@ import (
 const mode = "image"
 
 func main() {
-	switch mode {
-	case "image":
-		width := 800.0
-		height := 800.0
-		setup(width, height)
-		base.RenderImage(width, height, render)
-	case "gif":
-		width := 400.0
-		height := 400.0
-		time := 10
-		fps := 30
-		setup(width, height)
-		base.RenderGif(width, height, time, fps, render)
-	case "video":
-		width := 1280.0
-		height := 720.0
-		time := 10
-		fps := 30
-		base.RenderVideo(width, height, time, fps, render)
-	}
+	// w, h, percent
+	base.RenderImage(800, 800, 1, setup, render)
+	// w, h, time, fps
+	// base.RenderGif(400, 400, 30, 30, setup, render)
+	// base.RenderVideo(1280, 720, 10, 30, setup, render)
 }
 
 func setup(width, height float64) {

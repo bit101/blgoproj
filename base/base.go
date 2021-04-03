@@ -7,6 +7,7 @@ import (
 )
 
 type RenderFunc func(surface *blgo.Surface, width, height, percent float64)
+type SetupFunc func(width, height float64)
 
 var (
 	surface    *blgo.Surface
@@ -15,23 +16,26 @@ var (
 
 const framesDir = "frames" // Must Exist!!!
 
-func RenderImage(width, height float64, render RenderFunc) {
+func RenderImage(width, height, percent float64, setup SetupFunc, render RenderFunc) {
 	outFileName := "out.png"
 	surface = blgo.NewSurface(width, height)
-	render(surface, width, height, 0)
+	setup(width, height)
+	render(surface, width, height, percent)
 	surface.WriteToPNG(outFileName)
 	util.ViewImage(outFileName)
 }
 
-func RenderGif(width, height float64, seconds, fps int, render RenderFunc) {
+func RenderGif(width, height float64, seconds, fps int, setup SetupFunc, render RenderFunc) {
 	outFileName := "out.gif"
+	setup(width, height)
 	renderAnim(width, height, seconds, fps, render)
 	util.ConvertToGIF(framesDir, outFileName, float64(fps))
 	util.ViewImage(outFileName)
 }
 
-func RenderVideo(width, height float64, seconds, fps int, render RenderFunc) {
+func RenderVideo(width, height float64, seconds, fps int, setup SetupFunc, render RenderFunc) {
 	outFileName := "out.mp4"
+	setup(width, height)
 	renderAnim(width, height, seconds, fps, render)
 	util.ConvertToYoutube(framesDir, outFileName, fps)
 	util.VLC(outFileName)
